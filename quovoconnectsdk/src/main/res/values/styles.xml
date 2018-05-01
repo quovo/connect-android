@@ -1,0 +1,39 @@
+<resources>
+
+  <style name="QuovoWebViewTheme" parent="Theme.AppCompat.NoActionBar">
+    <item name="colorPrimary">@color/quovoWhite</item>
+    <item name="colorPrimaryDark">@color/quovoGray</item>
+    <item name="colorAccent">@color/quovoBlack</item>
+    <item name="android:textColorPrimary">@color/quovoBlack</item>
+    <item name="android:textColorSecondary">@color/quovoSilver</item>
+    <item name="windowActionModeOverlay">true</item>
+  </style>
+
+  <style name="QuovoWebViewTheme.Fullscreen" parent="QuovoWebViewTheme">
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowFullscreen">true</item>
+  </style>
+
+  <style name="QuovoWebViewTheme.Light" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="colorPrimary">@color/quovoWhite</item>
+    <item name="colorPrimaryDark">@color/quovoGray</item>
+    <item name="colorAccent">@color/quovoBlack</item>
+    <item name="android:textColorPrimary">@color/quovoBlack</item>
+    <item name="android:textColorSecondary">@color/quovoSilver</item>
+    <item name="windowActionModeOverlay">true</item>
+  </style>
+
+  <style name="QuovoWebViewTheme.Light.Fullscreen" parent="QuovoWebViewTheme.Light">
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowFullscreen">true</item>
+  </style>
+
+  <declare-styleable name="ShadowLayout">
+    <attr format="dimension" name="slCornerRadius"/>
+    <attr format="dimension" name="slShadowSize"/>
+    <attr format="color" name="slShadowColor"/>
+    <attr format="dimension" name="slDx"/>
+    <attr format="dimension" name="slDy"/>
+  </declare-styleable>
+
+</resources>

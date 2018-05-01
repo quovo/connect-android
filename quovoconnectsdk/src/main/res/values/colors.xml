@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="quovoWhite10">#1AFFFFFF</color>
+  <color name="quovoWhite20">#33FFFFFF</color>
+  <color name="quovoWhite30">#4DFFFFFF</color>
+
+  <color name="quovoGray10">#1AD2D2D2</color>
+  <color name="quovoGray20">#33D2D2D2</color>
+
+  <color name="quovoBlack05">#0D202020</color>
+  <color name="quovoBlack10">#1A202020</color>
+  <color name="quovoBlack20">#33202020</color>
+  <color name="quovoBlack30">#4D202020</color>
+  <color name="quovoBlack40">#66202020</color>
+
+  <color name="quovoWhite">#FFFFFF</color>
+  <color name="quovoBlack">#000000</color>
+  <color name="quovoSilver">#A5A5A5</color>
+  <color name="quovoGray">#E7E7E7</color>
+</resources>

@@ -1,0 +1,63 @@
+apply plugin: 'com.android.library'
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.1.0'
+    }
+}
+
+ext {
+    bintrayRepo = 'QuovoConnectSdk' // your repo name
+    bintrayName = 'quovoconnectsdk' // has to be same as your library module name
+    publishedGroupId = 'com.quovo.sdk' // your module package name
+    libraryName = 'quovoconnectsdk'
+    artifact = 'quovoconnectsdk' // has to be same as your library module name
+    libraryDescription = 'Quovo Connect SDK'
+    siteUrl = 'https://github.com/quovo/connect-android-private'
+    gitUrl = 'https://github.com/quovo/connect-android-private.git'
+    libraryVersion = '1.0'
+    developerId = 'Ihsan'
+    developerName = 'Ihsan'
+    developerEmail = 'ihsan.kabir@quovo.com'
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+android {
+    compileSdkVersion 27
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        // define build config variables specific to app
+        buildConfigField 'String', 'BASE_URL', "\"https://connect.quovo.com/\""
+        buildConfigField 'String', 'PARENT_HOST_URL', "\"https://demo.quovo.com\""
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation 'com.android.support:design:27.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}
+apply from: 'https://raw.githubusercontent.com/numetriclabz/jcenter/master/installv.gradle'
+apply from: 'https://raw.githubusercontent.com/numetriclabz/jcenter/master/bintrayv.gradle'
