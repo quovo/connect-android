@@ -1,0 +1,13 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.quovo.sdk">
+
+    <application>
+        <activity
+            android:name=".QuovoConnectSdkActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="sensor"
+            android:theme="@style/QuovoWebViewTheme.Light" />
+
+    </application>
+
+</manifest>
