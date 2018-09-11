@@ -5,6 +5,7 @@
 
 1. Open your project in Android Studio.
 2. Add QuovoConnectSDK as a dependency into your project
+   `implementation 'com.quovo.connect:connect-android:1.1.0'`
 3. Build the project
 
 
