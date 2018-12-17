@@ -1,5 +1,13 @@
 # Quovo-AndroidSDK
 
+## Latest Release
+
+### [v1.1.2](https://bintray.com/quovo/maven/connect-android/1.1.2)
+* Added custom timeout
+* Added ability to statically close
+* Added embeddable Fragment version
+* Fixed various bugs
+
 ## Installation
 
 The SDK can be added by including the following line in the dependency block of your `build.gradle` file:
@@ -10,12 +18,12 @@ dependencies {
 }
 ```
 
-You may also need to add JCenter as a repository for your app if you haven't done so already:
+You may also need to add the Quovo repository to your root `build.gradle`:
 ```gradle
 allprojects {
     repositories {
         // ...
-        jcenter()
+        maven { url 'https://dl.bintray.com/quovo/maven' }
     }
 }
 ```
@@ -34,6 +42,7 @@ A good place to initialize the SDK is upon app launch or in the launch method of
 ```java
 import com.quovo.sdk.listeners.OnCompleteListener
 
+// Note: Be careful interacting with the activity in the listeners as they may get called after the activity is destroyed
 quovoConnectSdk.setOnCompleteListener((callback, response) -> {
     Log.d("callback", callback);
     Log.d("response", response);
@@ -87,6 +96,7 @@ The other callbacks will yield an empty response. For more information on these 
 ```java
 import com.quovo.sdk.listeners.OnErrorListener;
 
+// Note: Be careful interacting with the activity in the listeners as they may get called after the activity is destroyed
 quovoConnectSdk.setOnErrorListener((errorType, code, message) -> {
     Log.d("errorType", errorType);
     Log.d("code", code);
@@ -109,6 +119,14 @@ For "http" errorType, it will be one of standard HTTP response codes in >=400 ra
 Launching the QuovoConnectSDK will instantiate a WebView experience that allows users to sync and manage their accounts. The minimum required parameter for launching the WebView is an Iframe Token.  This token must be generated via the API and will expire after its first use.
 ```java
 quovoConnectSdk.launch(userToken);
+```
+
+## Close the SDK
+
+The QuovoConnectSDK can be closed statically by using the QuovoConnectSDK class. This allows the SDK to be closed from the parent Activity as well as a broadcast or other external message.
+
+```java
+QuovoConnectSdk.close();
 ```
 
 ## Customization
@@ -189,3 +207,19 @@ You also have the option to enable or disable the progressbar from the navbar fo
 quovoConnectSdk.setProgressBarEnable(false);
 ```
 
+## Custom Timeout
+
+By default the Quovo Connect WebView will timeout after 30 seconds of attempting to connect. There is an option to customize the timeout length in milliseconds by calling `setTimeoutLength`, which takes a `Integer` parameter . When a timeout occurs an error will be sent to the ErrorHandler and the WebView will display a simple page stating that the connection timed out.
+
+```java
+quovoConnect.setTimeoutLength(5000);
+```
+
+## Using the Demo Project
+
+The demo project included with the SDK uses a configuration properties file to generate its user token. The file is git-ignored but should be added to your copy of the demo project in the root folder. The file should be named "configuration.properties" and should contain:
+
+```
+apiToken=_YOUR_API_TOKEN_
+userId=_YOUR_USER_ID_
+```
