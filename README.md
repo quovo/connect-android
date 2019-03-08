@@ -2,11 +2,8 @@
 
 ## Latest Release
 
-### [v1.1.3](https://bintray.com/quovo/maven/connect-android/1.1.3)
-* Connect v2 Support
-* Custom Subdomain Option
-* Added syncType and hideTray to options
-* Prevent Multiple Instances
+### [v1.1.4](https://bintray.com/quovo/maven/connect-android/1.1.4)
+* Fixed account-details for connect 2
 * Fixed various bugs
 
 ## Table Of Contents
@@ -36,7 +33,7 @@ The SDK can be added by including the following line in the dependency block of 
 ```gradle
 dependencies {
     // ...
-    implementation 'com.quovo.connect:connect-android:1.1.3'
+    implementation 'com.quovo.connect:connect-android:1.1.4'
 }
 ```
 
@@ -270,4 +267,3 @@ options.put("openConnection", 813981);
 
 quovoConnectSdk.launch(userToken, options);
 ```
-
