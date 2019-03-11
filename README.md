@@ -24,12 +24,10 @@
         * [Enable or Disable the Progressbar](#enable-or-disable-the-progressbar-for-connect)
         * [Custom Timeout](#custom-connect-timeout)
         * [Custom Subdomain](#custom-connect-subdomain)
-        * [Options for Connect](#options-for-connect)
-            * [Preselect an Institution](#preselect-an-institution)
-            * [Update or Resolve Issues on an Existing Connection](#update-or-resolve-issues-on-an-existing-connection)
-        * [Options for connect v2](#options-for-connect-v2)
-            * [Preselect an Institution](#preselect-an-institution)
-            * [Update or Resolve Issues on an Existing Connection](#update-or-resolve-issues-on-an-existing-connection)
+        * [Options for Connect v1](#options-for-connect-v1)
+        * [Options for Connect v2](#options-for-connect-v2)
+        * [Preselect an Institution](#preselect-an-institution)
+        * [Update or Resolve Issues on an Existing Connection](#update-or-resolve-issues-on-an-existing-connection)
 <!--te-->
 
 ## Installation
