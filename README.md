@@ -13,6 +13,8 @@
 * [Quovo Connect SDK](#quovo-connect-sdk)
     * [Initialize the SDK](#initialize-the-connect-sdk)
     * [Create a Completion Handler](#create-a-completion-handler-for-connect)
+        * [Connect v1 Callbacks](#connect-v1-callbacks)
+        * [Connect v2 Callbacks](#connect-v2-callbacks)
     * [Create an Error Handler](#create-an-error-handler-for-connect)
     * [Launch the SDK](#launch-the-connect-sdk)
     * [Close the SDK](#close-the-connect-sdk)
@@ -22,7 +24,10 @@
         * [Enable or Disable the Progressbar](#enable-or-disable-the-progressbar-for-connect)
         * [Custom Timeout](#custom-connect-timeout)
         * [Custom Subdomain](#custom-connect-subdomain)
-        * [Options](#options-for-connect)
+        * [Options for Connect](#options-for-connect)
+            * [Preselect an Institution](#preselect-an-institution)
+            * [Update or Resolve Issues on an Existing Connection](#update-or-resolve-issues-on-an-existing-connection)
+        * [Options for connect v2](#options-for-connect-v2)
             * [Preselect an Institution](#preselect-an-institution)
             * [Update or Resolve Issues on an Existing Connection](#update-or-resolve-issues-on-an-existing-connection)
 <!--te-->
@@ -78,17 +83,37 @@ quovoConnectSdk.setOnCompleteListener((callback, response) -> {
     Log.d("callback", callback);
     Log.d("response", response);
 });
-
 ```
-The completion handler will allow your app to listen for events that will be fired by the QuovoConnectSDK.  The handler has 2 parameters: a "callback" method name and an optional "response" payload. The "callback" string will be one of the following:
+The completion handler will allow your app to listen for events that will be fired by the QuovoConnectSDK.  The handler has 2 parameters: a "callback" method name and an optional "response" payload. 
+
+### Connect v1 Callbacks
+
+The "callback" strings supported by connect v1 are the following:
 
 * open
 * load
 * close
 * add
 * sync
+* onAuthenticate
 
-In the case of "add" and "sync" a response payload string will be returned.
+In the case of "add", "sync" and "onAuthenticate" a response payload of type NSDictionary will be returned.
+Here are some examples:
+
+### Connect v2 Callbacks
+
+The "callback" strings supported by connect v2 are the following:
+
+* open
+* load
+* close
+* add
+* sync
+* onAuthenticate
+* onAuthAccountSelected
+
+In the case of "add", "sync",  "onAuthenticate" and onAuthAccountSelected a response payload of type NSDictionary will be returned.
+
 Here are some examples:
 
 "Add" event fired:
@@ -213,7 +238,7 @@ By default the Connect SDK will connect to the original Quovo Connect, however t
 quovoConnect.setSubdomain(subdomain:"connect2")
 ```
 
-### Options for Connect
+### Options for Connect v1
 
 You can optionally pass in a set of parameters that control the appearance and functionality of the WebView experience.  An example of this is:
 ```java
@@ -234,8 +259,47 @@ The following is a list of the optional parameters that can be supplied to the l
 | searchTest           | integer (bit) | 0             | If on, Quovo test institutions will be searchable within Connect. |
 | openInstitution      | integer       |               | [See Preselect an Institution](#preselect-an-institution) |
 | openConnection       | integer       |               | [See Update or Resolve Issues on an Existing Connection](#update-or-resolve-issues-on-an-existing-connection) |
-| hideTray  | integer (bit) | 0 |   If on, the tray showing notifications will be hidden (Note: Only applies to Connect v2) |
-| syncType             | String       |                | Choose what type of connection syncs are performed within Connect. Possible values are `agg`, `auth`, or `both`, which will simultaneously run an agg AND auth sync on new connections. This parameter is optional and will default to agg. More information on integrating account verification with Connect can be found here. (https://api.quovo.com/docs/v3/ui/#auth)
+| syncType             | String       |                | Choose what type of connection syncs are performed within Connect. Possible values are `agg`, `auth`, or `both`, which will simultaneously run an agg AND auth sync on new connections. This parameter is optional and will default to both. More information on integrating account verification with Connect can be found here. (https://api.quovo.com/docs/v3/ui/#auth)
+
+### Options for Connect v2
+
+You can optionally pass in a set of parameters that control the appearance and functionality of the WebView experience.  An example of this is:
+```java
+HashMap<String, Object> options = new HashMap<>();
+options.put("testInstitutions", 1);
+options.put("topInstitutions", "banks");
+
+quovoConnectSdk.launch(userToken, options);
+```
+
+The following is a list of the optional parameters that can be supplied to the launch method for Connect2:
+
+| Field                | Type          | Default       | Description |
+| -------------------- | ------------- | ------------- | ----------- |
+| topInstitutions      | string or array    | 'all'         | Choose what type of institutions, if any, will be displayed in the Top Institutions portion of the institution select screen. Possible values are `banks`, `brokerages`, `all`, or `none`. <br>If you'd like to customize the default institutions you can pass in an array of institution ids like: `[1249,1209,2779,2782]` |
+| searchTest           | integer (bit) | 0             | If on, Quovo test institutions will be searchable within Connect. |
+| openInstitution      | integer       |               | [See Preselect an Institution](#preselect-an-institution) |
+| openConnection       | integer       |               | [See Update or Resolve Issues on an Existing Connection](#update-or-resolve-issues-on-an-existing-connection) |
+| hideTray  | integer (bit) | 0 |   If on, the tray showing notifications will be hidden|
+| syncType             | String       |                | Choose what type of connection syncs are performed within Connect. Possible values are `agg`, `auth`, `aggBoth` or `authBoth`.  This parameter is optional and will default to agg.  Connect has specific screen flows that are configured for agg vs auth sync types if using  `aggBoth` or `authBoth` you will need to define which is the primary workflow for your users as it will simultaneously run an agg AND auth sync on new connections.  More information on integrating account verification with Connect can be found here. (https://api.quovo.com/docs/v3/ui/#auth)|
+| headerText           | string|              | Choose the global header text. This parameter is optional and will default to Connect Accounts.|
+| showManualAccounts   | integer (bit)|  0    | Choose whether the "Enter Manually" displays at bottom of landing page & search results. If False, this section will be hidden. This parameter is optional and will default to True.|
+| confirmClose         | integer (bit)|  1    | Defaults to `true`, setting to `false` will hide the prompt asking the user to confirm that they’d like to close the Connect Widget will be presented when the "close" icon is clicked.|
+
+<br>
+<br>
+<br>
+On Enter Credentials screen, there is messaging below the password field that can be configured using the fields below:
+<br>
+<br>
+<br>
+
+| Field                | Type          | Default       | Description |
+| -------------------- | ------------- | ------------- | ----------- |
+| learnMoreIsHidden    | integer (bit) |    0          | Defaults to `false`, setting to `true` will hide the "We use bank-level encryption to keep your data secure. Learn More"|
+| learnMoreInfoMessage           | string|           | Configure text for "We use bank-level encryption to keep your data secure. Learn More". This parameter is optional and will default to text above.|
+| learnMoreText           | string|              | Configure text for "Learn More". This parameter is optional and will default to text above.|
+| learnMoreUrl           | string|              | By default this is set to `false` and when clicking the text "Learn More", you will be re-directed to https://www.quovo.com/infosec/. Configure by entering url into this parameter.|
 
 #### Preselect an Institution
 
