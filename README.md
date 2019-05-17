@@ -95,7 +95,7 @@ The "callback" strings supported by connect v1 are the following:
 * sync
 * onAuthenticate
 
-In the case of "add", "sync" and "onAuthenticate" a response payload of type NSDictionary will be returned.
+In the case of "add", "sync" and "onAuthenticate" a Json response payload of type `String` will be returned.
 Here are some examples:
 
 ### Connect v2 Callbacks
@@ -110,7 +110,7 @@ The "callback" strings supported by connect v2 are the following:
 * onAuthenticate
 * onAuthAccountSelected
 
-In the case of "add", "sync",  "onAuthenticate" and onAuthAccountSelected a response payload of type NSDictionary will be returned.
+In the case of "add", "sync",  "onAuthenticate" and onAuthAccountSelected a Json response payload of type `String` will be returned.
 
 Here are some examples:
 
